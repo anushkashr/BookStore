@@ -32,6 +32,10 @@ namespace BookStoreWeb.Controllers
         [ValidateAntiForgeryToken] //Helps and prevents cross site forgery attack
         public IActionResult Create(Category obj)
         {
+            if (obj.Name == obj.DisplayOrder.ToString()) 
+            {
+                ModelState.AddModelError("Custom Error", "The Display Order cannot be same as the Name");
+            }
             if(ModelState.IsValid) //if valid create and redirect to index, if not we return back to the view with the object
             {
                 //Now that we have the category object that is populated with name and display order,
