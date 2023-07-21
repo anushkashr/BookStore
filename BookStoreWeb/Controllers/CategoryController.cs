@@ -18,5 +18,12 @@ namespace BookStoreWeb.Controllers
 
             return View(objCategoryList);
         }
+
+        //GET
+        public IActionResult Create()
+        {
+
+            return View();
+        }
     }
 }
