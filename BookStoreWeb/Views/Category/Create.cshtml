@@ -7,7 +7,19 @@
         </div>
         <div class="mb-3">
             <label asp-for="Name">Name</label>
+            <input asp-for="Name" class="form-control" />
         </div>
+        <div class="mb-3">
+            <label asp-for="DisplayOrder">Display Order</label>
+            <input asp-for="DisplayOrder" class="form-control" />
+        </div>
+         @*adding a button with a link that goes back to the Index action method inside the 
+                CategoryController to load all of the categories 
+                LIKE A BACK BUTTON LINK*@
+        <button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+        <a asp-controller="Category" asp-action="Index" class="btn btn-secondary" style="width:150px">
+            Back to List
+        </a>
     </div>
 </form>
 
