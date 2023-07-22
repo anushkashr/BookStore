@@ -2,6 +2,7 @@
 using BookStoreWeb.Models;
 using Humanizer;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace BookStoreWeb.Controllers
@@ -57,7 +58,7 @@ namespace BookStoreWeb.Controllers
 
         //we will retrive an integer which will be id and based on it we have to retrieve the category details
         //and display them
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
             if(id==null || id == 0)
             {
@@ -102,6 +103,51 @@ namespace BookStoreWeb.Controllers
                 return RedirectToAction("Index");
             }
             return View(obj); //if not we return back to the view with the object
+        }
+
+        //DELETE
+        //GET
+
+        //we will retrive an integer which will be id and based on it we have to retrieve the category details
+        //and display them
+        public IActionResult Delete(int? id)
+        {
+            if (id == null || id == 0)
+            {
+                return NotFound(); //bc its an invalid id
+            }
+            //if thats not invalid then we will retrieve the Categories from database
+            var categoryFromDb = _db.Categories.Find(id);
+            //var categoryFromDbFirst = _db.Categories.FirstOrDefault(u=>u.Id==id);
+            //var categoryFromDbSingle = _db.Categories.SingleOrDefault(u=>u.Id==id);
+
+            if (categoryFromDb == null)
+            {
+                return NotFound();
+            }
+            return View(categoryFromDb);
+            //Next Step from here
+            //we will create a view which will have the category loaded which will look exactly like the create view
+
+        }
+
+        //POST
+        [HttpPost]
+        [ValidateAntiForgeryToken] //Helps and prevents cross site forgery attack
+        public IActionResult DeletePOST(int? id)
+        {
+            var obj = _db.Categories.Find(id);
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            _db.Categories.Remove(obj);           
+
+            _db.SaveChanges();
+
+           //rather than returning the view, we want to redirect to the Index action
+            return RedirectToAction("Index");
         }
     }
 }

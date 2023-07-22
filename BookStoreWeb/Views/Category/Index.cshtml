@@ -26,6 +26,7 @@
                 Display order
             </th>
             <th></th>
+                <th></th>
         </tr>
     </thead>
     <tbody>
@@ -44,6 +45,12 @@
                         class="btn btn-primary mx-4">Edit</a>
                     </div>
                 </td>
+                    <td>
+                        <div class="w-75 btn-group" role="group">
+                            <a asp-controller="Category" asp-action="Delete" asp-route-id="@obj.Id"
+                               class="btn btn-danger mx-4">Delete</a>
+                        </div>
+                    </td>
             </tr>
         }
         
