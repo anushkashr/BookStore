@@ -47,6 +47,8 @@ namespace BookStoreWeb.Controllers
 
                 _db.SaveChanges(); //to save changes and push to db
 
+                TempData["success"] = "Category created successfully";
+
                 //return View();  rather than returning the view, we want to redirect to the Index action
                 return RedirectToAction("Index"); 
             }
@@ -99,6 +101,8 @@ namespace BookStoreWeb.Controllers
 
                 _db.SaveChanges(); //to save changes and push to db
 
+                TempData["success"] = "Category updated successfully";
+
                 //return View();  rather than returning the view, we want to redirect to the Index action
                 return RedirectToAction("Index");
             }
@@ -145,8 +149,9 @@ namespace BookStoreWeb.Controllers
             _db.Categories.Remove(obj);           
 
             _db.SaveChanges();
+            TempData["success"] = "Category deleted successfully";
 
-           //rather than returning the view, we want to redirect to the Index action
+            //rather than returning the view, we want to redirect to the Index action
             return RedirectToAction("Index");
         }
     }
